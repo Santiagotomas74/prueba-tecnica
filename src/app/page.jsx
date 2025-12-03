@@ -20,7 +20,7 @@ export default function Home() {
         </a>
 
         <div className="mt-10 text-sm text-gray-500">
-          <p>Desarrollado por Santiago • {new Date().getFullYear()}</p>
+          <p>Desarrollado por Santiago Taher • {new Date().getFullYear()}</p>
         </div>
       </div>
     </main>
