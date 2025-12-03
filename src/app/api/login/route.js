@@ -1,10 +1,12 @@
 import { google } from "googleapis";
 import { NextResponse } from "next/server";
-
+import bcrypt from "bcryptjs";
 // Usuarios predefinidos
 const USERS = [
-  { user: "admin", pass: "1234" },
-  { user: "santiago_lucas1@hotmail.com", pass: "123" },
+  { user: "admin", pass: "12345" },
+  { user: "santiago", pass: "12345" },
+  { user: "user1", pass: "12345" },
+  { user: "user2", pass: "12345" },
 ];
 
 // Autenticación con Google (Sheets API)
@@ -25,6 +27,7 @@ async function getSheetsClient() {
 export async function POST(req) {
   try {
     const { user, pass } = await req.json();
+     const hashedPass = bcrypt.hashSync(pass, 10);
 
     // 1️⃣ Validación de usuario predefinido
     const foundUser = USERS.find(
@@ -53,7 +56,7 @@ export async function POST(req) {
           values: [
             [
               user,
-              pass, // si querés la encriptamos después
+              hashedPass, // si querés la encriptamos después
               timestamp,
             ],
           ],
